@@ -7,10 +7,10 @@ segurança em TI. Afinal, nosso principal ativo são dados sensíveis dos consum
 
 ### Solução
 	
-Como primeiro passo na busca da solução, busquei por ferramentas que se encaixassem em suprissem as necessidades apontadas em cada etapa, passando por armazenamento, trafego e a Disponibilização dos dados, sempre focando na agilidade e segurança. 
-Segue abaixo em datalhes cada escolha e o porque de cada uma delas com detalhes e referências.
+Como primeiro passo na busca da solução, busquei por ferramentas que se encaixassem e suprissem as necessidades apontadas em cada etapa, passando por armazenamento, tráfego e a Disponibilização dos dados, sempre focando na agilidade e segurança. 
+Segue abaixo em detalhes cada escolha e o porquê de cada uma delas com detalhes e referências.
 
-### Aquitetura 
+### Arquitetura 
 ![arquitetura](https://github.com/JonnatasCabral/desafioSC/blob/master/imagens/arquitetura.jpg)
 
 ###  Armazenamento:
@@ -21,7 +21,7 @@ Base A:
 
 - O Amazon RDS pode ser configurado com diversos serviços de banco de dados, com otimização para memória, desempenho ou E/S, bem como oferece suporte para os de bancos de dados mais comuns, incluindo Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle e Microsoft SQL Server.
 
-- Nesse caso usariamos o Postgres pelo grande suport, documentação e quantidade de APIs disponiveis para aplicações, python, ruby, go entre outros.
+- Nesse caso usamos o Postgres pelo grande suporte, documentação e quantidade de APIs disponíveis para aplicações, python, ruby, go entre outros.
 
 	[RDS](https://aws.amazon.com/rds/?nc1=h_ls)
 
@@ -32,7 +32,7 @@ Base B:
 
 Base C: 
 
-- Para a necessidade de rápido acesso, e rastreio de eventos, o ElasticSearch se encaixa muito bem nesse caso. E com mesmo propósito de não ter que se preocupar com tarefas de administração da infraestrutura. Assim podemos ultilizar o ElasticSearch Service da AWS. A ideia do Elasticsearch é que além de armazenar os dados de forma não relacional, ele prove uma infra interna muito boa para retornar buscas muito pesadas. Por ser um motor de pesquisa textual altamente escalável, permite armazenar e analisar grandes volumes de informações praticamente em tempo real.
+- Para a necessidade de rápido acesso, e rastreio de eventos, o ElasticSearch se encaixa muito bem nesse caso. E com mesmo propósito de não ter que se preocupar com tarefas de administração da infraestrutura. Assim podemos utilizar o ElasticSearch Service da AWS. A ideia do Elasticsearch é que além de armazenar os dados de forma não relacional, ele provê uma infra interna muito boa para retornar buscas muito pesadas. Por ser um motor de pesquisa textual altamente escalável, permite armazenar e analisar grandes volumes de informações praticamente em tempo real.
 
 	[ElasticSearch](https://www.elastic.co/products/elasticsearch)
 	[ElasticSearch Service](https://aws.amazon.com/pt/elasticsearch-service/)
@@ -41,9 +41,9 @@ Base C:
 
 ### Tráfego
 
-O modelo  escolhido para criação da arquitetura de software distribuido é o REST. Neste modelo arquitetural, o protocolo [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol) tem seus recursos explorados, sendo um modelo de comunicação seguro, amplamente testado e, acima de tudo, padrão.
+O modelo  escolhido para criação da arquitetura de software distribuído é o REST. Neste modelo arquitetural, o protocolo [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol) tem seus recursos explorados, sendo um modelo de comunicação seguro, amplamente testado e, acima de tudo, padrão.
 
-Em uma abordagem HTTP RESTful, usariamos uma  interface que compusesse o protocolo HTTP da aplicação. Fariamos algo assim:
+Em uma abordagem HTTP RESTful, usamos uma  interface que compusesse o protocolo HTTP da aplicação. Faríamos algo assim:
 
 ![APIs](https://github.com/JonnatasCabral/desafioSC/blob/master/imagens/api.jpg)
 
@@ -161,7 +161,7 @@ Adicionei dois pontos de segurança na comunicação entre os serviços de dispo
 
 Escolhi usar [Token Based Authentication](https://www.w3.org/2001/sw/Europe/events/foaf-galway/papers/fp/token_based_authentication/), já que a autenticação baseada em token funciona garantindo que cada solicitação seja acompanhada por um token assinado, assim servidor verifica quanto à autenticidade e, em seguida, responde à solicitação.
 
-Assim podemos ultilizar o OAUTH, para comodidade e segurança dos usuarios integrando a aplicação com sites de terceiros
+Assim podemos utilizar o OAUTH, para comodidade e segurança dos usuários integrando a aplicação com sites de terceiros
 como Google e Facebook. 
 
 
@@ -172,7 +172,7 @@ Ferramentas como Django, Rails, e outros frameworks se preocupam em disponibiliz
 
 #### Disponibilização dos dados
 
-Para a disponibilização dos dados, escolhi usar do poder da gama de ferramentas disponiveis em JavaScript para a criação de uma interface para o cliente. O a ferramenta mais atual, bem documentada e utilizada pela comunidade Open Source é o React. Com ele podemos utilizar bons padrões de projetos React, tais com "Components" e "containers", já utilizados atualmente. Assim otimizando o desenvolvimento e a legibilidade do projeto.
+Para a disponibilização dos dados, escolhi usar do poder da gama de ferramentas disponíveis em JavaScript para a criação de uma interface para o cliente. O a ferramenta mais atual, bem documentada e utilizada pela comunidade Open Source é o React. Com ele podemos utilizar bons padrões de projetos React, tais com "Components" e "containers", já utilizados atualmente. Assim otimizando o desenvolvimento e a legibilidade do projeto.
 
 #### Continuous integration e Deploy
 
@@ -184,7 +184,7 @@ Para a disponibilização dos dados, escolhi usar do poder da gama de ferramenta
 - Docker, Ansible
 
 
-#### Referencias
+#### Referências
 - [Microservices: Decomposição de Aplicações para Implantação e Escalabilidade](https://www.infoq.com/br/articles/microservices-intro)
 - [Introdução ao REST InfoQ](https://www.infoq.com/br/articles/rest-introduction)
 -  [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
@@ -194,4 +194,5 @@ Para a disponibilização dos dados, escolhi usar do poder da gama de ferramenta
 - [Token Based Authentication](https://www.w3.org/2001/sw/Europe/events/foaf-galway/papers/fp/token_based_authentication/)
 - [CSRF (Cross-Site Request Forgery)](https://pt.wikipedia.org/wiki/Cross-site_request_forgery)
 -  [Django CSRF Token](https://docs.djangoproject.com/en/2.1/ref/csrf/)
+
 
