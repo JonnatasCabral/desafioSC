@@ -1,4 +1,5 @@
 
+
 ### O Problema
 
 Elabore uma solução que ofereça armazenamento, processamento e disponi-
@@ -174,14 +175,15 @@ Ferramentas como Django, Rails, e outros frameworks se preocupam em disponibiliz
 
 Para a disponibilização dos dados, escolhi usar do poder da gama de ferramentas disponíveis em JavaScript para a criação de uma interface para o cliente. O a ferramenta mais atual, bem documentada e utilizada pela comunidade Open Source é o React. Com ele podemos utilizar bons padrões de projetos React, tais com "Components" e "containers", já utilizados atualmente. Assim otimizando o desenvolvimento e a legibilidade do projeto.
 
-#### Continuous integration e Deploy
+#### Desenvolvimento e Deploy
+Para melhorar a portabilidade das aplicações para os ambientes de desenvolvimento e produção usaremos o Docker, que possibilita o empacotamento dos nossos serviços  dentro de um container, assim podemos utilizar diversas ferramentas e linguagem, e só precisamos garantir que os ambientes de desenvolvimento e produção (AWS) possuam Docker.
 
 #### Tecnologias adotadas
 - AWS
 - Python, Ruby, JavaScript
 - Django, Rails, Node, React
 - Postgres, ElasticSearch
-- Docker, Ansible
+- Docker
 
 
 #### Referências
