@@ -5,11 +5,11 @@
 Base A: É extremamente sensível e deve ser protegida com
 os maiores níveis de segurança, mas o acesso a esses dados não precisa ser tão performática.
 	
-	- Para essas necessidades podemos utilizar O Amazon Relational Database Service (Amazon RDS) que facilita configurar, operar e escalar bancos de dados relacionais na nuvem. O serviço oferece capacidade econômica e redimensionável e automatiza tarefas demoradas de administração, como provisionamento de hardware, configuração de bancos de dados, aplicação de patches e backups. Com isso, você pode se concentrar no desempenho rápido, na alta disponibilidade, na segurança e na conformidade que as aplicações precisam.
+- Para essas necessidades podemos utilizar O Amazon Relational Database Service (Amazon RDS) que facilita configurar, operar e escalar bancos de dados relacionais na nuvem. O serviço oferece capacidade econômica e redimensionável e automatiza tarefas demoradas de administração, como provisionamento de hardware, configuração de bancos de dados, aplicação de patches e backups. Com isso, você pode se concentrar no desempenho rápido, na alta disponibilidade, na segurança e na conformidade que as aplicações precisam.
 
-	- O Amazon RDS pode ser configurado com diversos serviços de banco de dados, com otimização para memória, desempenho ou E/S, bem como oferece suporte para os de bancos de dados mais comuns, incluindo Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle e Microsoft SQL Server.
+- O Amazon RDS pode ser configurado com diversos serviços de banco de dados, com otimização para memória, desempenho ou E/S, bem como oferece suporte para os de bancos de dados mais comuns, incluindo Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle e Microsoft SQL Server.
 
-	- Nesse caso usariamos o Postgres pelo grande suport, documentação e quantidade de APIs disponiveis para aplicações, python, ruby, go entre outros.
+- Nesse caso usariamos o Postgres pelo grande suport, documentação e quantidade de APIs disponiveis para aplicações, python, ruby, go entre outros.
 
 Base B:  Base B que também possui dados críticos, mas ao contrário da Base A, o acesso
 precisa ser um pouco mais rápido. Uma outra característica da Base B é que além de consultas
