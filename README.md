@@ -48,6 +48,12 @@ Em uma abordagem HTTP RESTful, usamos uma  interface que compusesse o protocolo 
 
 ![APIs](https://github.com/JonnatasCabral/desafioSC/blob/master/imagens/api.jpg)
 
+#### API Gateway
+
+Para a porta de entrada das nossas APIs, escolhi usar o API Gateway da AWS. Pensando na segurança, possuir um Gateway de APIs é uma das melhores soluções no mercado para conseguir ter o controle integral de sua API. 
+Contemplando os pilares CIA (Confidentiality, Integrity, Availability) de forma quase impecável.
+
+
 ##### Payloads 
 
 
