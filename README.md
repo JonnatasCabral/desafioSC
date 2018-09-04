@@ -27,9 +27,7 @@ ela é utilizada para extração de dados por meio de algoritmos de aprendizado 
 Base C: A Base C, que não possui nenhum tipo de dado crítico, mas precisa de um acesso
 extremamente rápido.
 
-	- Para a necessidade de rápido acesso, e rastreio de eventos, o ElasticSearch se encaixa muito
-	bem nesse caso. E com mesmo propósito de não ter que se preocupar com tarefas de administração da infraestrutura,
-	Podemos ultilizar o ElasticSearch Service da AWS. A ideia do Elasticsearch é que além de armazenar os dados de forma não relacional, ele prove uma infra interna muito boa para retornar buscas muito pesadas. Por ser um motor de pesquisa textual altamente escalável, permite armazenar e analisar grandes volumes de informações praticamente em tempo real.
+- Para a necessidade de rápido acesso, e rastreio de eventos, o ElasticSearch se encaixa muito bem nesse caso. E com mesmo propósito de não ter que se preocupar com tarefas de administração da infraestrutura. Assim podemos ultilizar o ElasticSearch Service da AWS. A ideia do Elasticsearch é que além de armazenar os dados de forma não relacional, ele prove uma infra interna muito boa para retornar buscas muito pesadas. Por ser um motor de pesquisa textual altamente escalável, permite armazenar e analisar grandes volumes de informações praticamente em tempo real.
 
 	[ElasticSearch](https://www.elastic.co/products/elasticsearch)
 	[ElasticSearch Service](https://aws.amazon.com/pt/elasticsearch-service/)
@@ -162,13 +160,18 @@ Assim podemos ultilizar o OAUTH, para comodidade e segurança dos usuarios integ
 como Google e Facebook. 
 
 
-##### [CSRF  (Cross-Site Request Forgery)](https://pt.wikipedia.org/wiki/Cross-site_request_forgery)
+##### CSRF  (Cross-Site Request Forgery)
 
-A primeira defesa contra ataques de CSRF é garantir que as solicitações GET e outros métodos 'seguros', sejam livres de efeitos colaterais. Solicitações através de métodos "inseguros", como POST, PUT e DELETE, podem ser protegidos.
+A primeira defesa contra ataques de [CSRF](https://pt.wikipedia.org/wiki/Cross-site_request_forgery) é garantir que as solicitações GET e outros métodos 'seguros', sejam livres de efeitos colaterais. Solicitações através de métodos "inseguros", como POST, PUT e DELETE, podem ser protegidos.
 Ferramentas como Django, rails, e outros frameworks se preocupam em disponibilizar uma fácil implementação para essa vulnerabilidade.
+
+#### Disponibilização dos dados
+
+Para a disponibilização dos dados, escolhi usar do poder da gama de ferramentas disponiveis em JavaScript para a criação de uma interface para o cliente. O a ferramenta mais atual, bem documentada e utilizada pela comunidade Open Source é o React. Com ele podemos utilizar bons padrões de projetos, tais com "Components" e "containers", já utilizados atualmente. Assim otimizando o desenvolvimento e a legibilidade do projeto.
 
 #### Tecnologias adotadas
 - AWS
 - Python, Ruby, JavaScript
 - Django, Rails, Node, React
 - Postgres, ElasticSearch
+- Docker, Ansible
