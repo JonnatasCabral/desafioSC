@@ -28,7 +28,7 @@ extremamente rápido.
 
 Em uma abordagem HTTP RESTful, começariamos com uma  interface que compusesse o protocolo HTTP da aplicação. Fariamos algo assim:
 
-![APIs](https://github.com/jonnatascabral/desacioSC/blob/master/imagens/api.jpg)
+![APIs](https://github.com/JonnatasCabral/desafioSC/blob/master/imagens/api.jpg)
 
 A arquitetura escolhida 
 Cada uma das bases existentes, são acessadas por sistemas em duas diferentes arquiteturas: micro-
