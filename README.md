@@ -1,4 +1,9 @@
+
 # desafioSC
+
+## Solução
+	
+Como primeiro passo na busca da solução, busquei por ferramentas que se encaixassem em suprissem as necessidades apontadas em cada etapa, passando por armazenamento, trafego e a Disponibilização dos dados, sempre focando na agilidade e segurança.
 
 ###  Armazenamento:
 
@@ -11,57 +16,159 @@ os maiores níveis de segurança, mas o acesso a esses dados não precisa ser t�
 
 - Nesse caso usariamos o Postgres pelo grande suport, documentação e quantidade de APIs disponiveis para aplicações, python, ruby, go entre outros.
 
+	[RDS](https://aws.amazon.com/rds/?nc1=h_ls)
+
 Base B:  Base B que também possui dados críticos, mas ao contrário da Base A, o acesso
 precisa ser um pouco mais rápido. Uma outra característica da Base B é que além de consultas
 ela é utilizada para extração de dados por meio de algoritmos de aprendizado de máquina.
-
+	
 
 
 Base C: A Base C, que não possui nenhum tipo de dado crítico, mas precisa de um acesso
 extremamente rápido.
-	- Para a necessidade de rápido acesso, e rastreio de eventos, O ElasticSearch se encaixa muito
-	bem nesse caso. E com mesmo proposito de não ter que se preocupar com tarefas de administração da infraestrutura,
-	Podemos ultilizar o ElasticSearch Service da AWS. 
+
+	- Para a necessidade de rápido acesso, e rastreio de eventos, o ElasticSearch se encaixa muito
+	bem nesse caso. E com mesmo propósito de não ter que se preocupar com tarefas de administração da infraestrutura,
+	Podemos ultilizar o ElasticSearch Service da AWS. A ideia do Elasticsearch é que além de armazenar os dados de forma não relacional, ele prove uma infra interna muito boa para retornar buscas muito pesadas. Por ser um motor de pesquisa textual altamente escalável, permite armazenar e analisar grandes volumes de informações praticamente em tempo real.
+
+	[ElasticSearch](https://www.elastic.co/products/elasticsearch)
+	[ElasticSearch Service](https://aws.amazon.com/pt/elasticsearch-service/)
+
 
 
 ### Tráfego
 
-Em uma abordagem HTTP RESTful, começariamos com uma  interface que compusesse o protocolo HTTP da aplicação. Fariamos algo assim:
+O modelo  escolhido para criação da arquitetura de software distribuido é o REST. Neste modelo arquitetural, o protocolo [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol) tem seus recursos explorados, sendo um modelo de comunicação seguro, amplamente testado e, acima de tudo, padrão.
+
+Em uma abordagem HTTP RESTful, usariamos uma  interface que compusesse o protocolo HTTP da aplicação. Fariamos algo assim:
 
 ![APIs](https://github.com/JonnatasCabral/desafioSC/blob/master/imagens/api.jpg)
 
-A arquitetura escolhida 
-Cada uma das bases existentes, são acessadas por sistemas em duas diferentes arquiteturas: micro-
-serviços e nano-serviços. Vale salientar que essas bases de dados são externas, portanto não é
-necessário dissertar sobre suas implementações, apenas suas consumações. Quantos aos payloads
-retornados por esses recursos, o candidato pode usar sua criatividade e definí-los, imaginando quais
-dados seriam importantes de serem retornados por sistemas como esses.
-O primeiro sistema, acessa os seguintes dados da Base A:
+##### Payloads 
 
-• CPF
-• Nome
-• Endereço
-• Lista de dívidas
 
-O segundo, acessa a Base B que contém dados para cálculo do Score de Crédito. O Score
-de Crédito é um rating utilizado por instituições de crédito (bancos, imobiliárias, etc) quando
-precisam analisar o risco envolvido em uma operação de crédito a uma entidade.
+Microservice A:
 
-• Idade
-• Lista de bens (Imóveis, etc)
-• Endereço
-• Fonte de renda
+ `pessoas/{cpf}`
+```json
+payload = {
+  "cpf": Number,
+  "nome": String,
+  "endereco": {
+    "rua": String,
+    "numero": Number,
+    "cep": Number
+  },
+  "dividas": [
+    {
+      "divida": String,
+      "valor": Number,
+      "Descricao": String
+    },
+    {
+      "divida": String,
+      "valor": Number,
+      "Descricao": String
+    }
+  ]
+}
+```
 
-O último serviço, acessa a Base C e tem como principal funcionalidade, rastrear eventos rela-
-cionados a um determinado CPF.
 
-• Última consulta do CPF em um Bureau de crédito (Serasa e outros).
-• Movimentação financeira nesse CPF.
-• Dados relacionados a última compra com cartao de crédito vinculado ao CPF.
+Microservice B
 
-Como você resolveria esse problema? Divague sobre os seguintes tópicos e outros que ache
-adequado, sinta-se a vontade para desenhar, escrever, criar diagramas, vídeos, apresentação, ou
-qualquer outro meio que facilite o entendimento por parte dos avaliadores:
-• Tecnologias adotadas
-• Arquitetura utilizada
-• Dados armazenados (já listados ou que você acrescentaria)
+`/{cpf}/score`
+```json
+payload =  {
+  "cpf": Number,
+  "nome": String, 
+  "idade": Number,
+  "bens": [
+    {
+      "titulo": String,
+      "valor": Number,
+      "Descricao": String
+    },
+    {
+      "titulo": String,
+      "valor": Number,
+      "Descricao": String
+    }
+  ],
+  "endereco": {
+    "rua": String,
+    "numero": Number,
+    "cep": Number
+  },
+  "rendas": [
+    {
+      "fonte": String,
+      "valor": Number,
+      "descricao": String
+    },
+    {
+      "fonte": String,
+      "valor": Number,
+      "descricao": String
+    },
+  ]
+}
+```
+
+Microservice C
+
+`/{cpf}/eventos`
+```json
+{
+  "cpf": Number,
+  "nome": String,
+  "cosultas": [
+    {
+      "bureau": String,
+    },
+    {
+      "bureau": String,
+    },
+  ],
+  "ultima_compra": {
+    "valor": Number,
+    "descricao": String,
+  },
+  "movimentacoes": [
+    {
+      "tipo": String,
+      "valor": Number,
+      "descricao": String
+    },
+    {
+      "tipo": String,
+      "valor": Number,
+      "descricao": String
+    },
+  ]
+}
+```
+
+#### Segurança
+
+Adicionei dois pontos de segurança na comunicação entre os serviços de disponibilização de dados, utilizando de 
+
+
+##### Authenticação
+
+Escolhi usar [Token Based Authentication](https://www.w3.org/2001/sw/Europe/events/foaf-galway/papers/fp/token_based_authentication/), já que a autenticação baseada em token funciona garantindo que cada solicitação seja acompanhada por um token assinado, assim servidor verifica quanto à autenticidade e, em seguida, responde à solicitação.
+
+Assim podemos ultilizar o OAUTH, para comodidade e segurança dos usuarios integrando a aplicação com sites de terceiros
+como Google e Facebook. 
+
+
+##### [CSRF  (Cross-Site Request Forgery)](https://pt.wikipedia.org/wiki/Cross-site_request_forgery)
+
+A primeira defesa contra ataques de CSRF é garantir que as solicitações GET e outros métodos 'seguros', sejam livres de efeitos colaterais. Solicitações através de métodos "inseguros", como POST, PUT e DELETE, podem ser protegidos.
+Ferramentas como Django, rails, e outros frameworks se preocupam em disponibilizar uma fácil implementação para essa vulnerabilidade.
+
+#### Tecnologias adotadas
+- AWS
+- Python, Ruby, JavaScript
+- Django, Rails, Node, React
+- Postgres, ElasticSearch
