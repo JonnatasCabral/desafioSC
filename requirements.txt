@@ -1,0 +1,9 @@
+Django==2.1.1
+django-environ==0.4.0
+pytz==2018.5
+djangorestframework==3.7.3
+
+gunicorn==19.6.0
+
+# database
+psycopg2==2.7

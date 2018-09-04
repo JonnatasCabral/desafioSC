@@ -1,0 +1,37 @@
+version: '2'
+
+volumes:
+    webserver_staticfiles: {}
+    webserver_media: {}
+
+services:
+    database:
+        restart: always
+        image: postgres:9.6
+        container_name: database
+        env_file:
+            - ./compose/environ/local.env
+        expose:
+            - 5432
+        ports:
+            - 5555:5432
+
+    webserver:
+        image: etl-pipelines
+        container_name: webserver
+        build:
+            context: .
+            dockerfile: ./compose/django/Dockerfile
+        env_file:
+            - ./compose/environ/local.env
+        volumes:
+            - .:/app
+            - webserver_staticfiles:/app/staticfiles
+            - webserver_media:/app/media
+        command: python manage.py runserver 0.0.0.0:8000
+        links:
+            - database
+        depends_on:
+            - database
+        ports:
+            - 8000:8000
