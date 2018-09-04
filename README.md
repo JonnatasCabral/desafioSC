@@ -1,16 +1,23 @@
 
-# desafioSC
+### O Problema
 
-## Solução
+Elabore uma solução que ofereça armazenamento, processamento e disponi-
+bilização desses dados, sempre considerando que tudo deve estar conforme as boas práticas de
+segurança em TI. Afinal, nosso principal ativo são dados sensíveis dos consumidores brasileiros.
+
+### Solução
 	
-Como primeiro passo na busca da solução, busquei por ferramentas que se encaixassem em suprissem as necessidades apontadas em cada etapa, passando por armazenamento, trafego e a Disponibilização dos dados, sempre focando na agilidade e segurança.
+Como primeiro passo na busca da solução, busquei por ferramentas que se encaixassem em suprissem as necessidades apontadas em cada etapa, passando por armazenamento, trafego e a Disponibilização dos dados, sempre focando na agilidade e segurança. 
+Segue abaixo em datalhes cada escolha e o porque de cada uma delas com detalhes e referências.
+
+### Aquitetura 
+![arquitetura](https://github.com/JonnatasCabral/desafioSC/blob/master/imagens/arquitetura.jpg)
 
 ###  Armazenamento:
 
-Base A: É extremamente sensível e deve ser protegida com
-os maiores níveis de segurança, mas o acesso a esses dados não precisa ser tão performática.
+Base A: 
 	
-- Para essas necessidades podemos utilizar O Amazon Relational Database Service (Amazon RDS) que facilita configurar, operar e escalar bancos de dados relacionais na nuvem. O serviço oferece capacidade econômica e redimensionável e automatiza tarefas demoradas de administração, como provisionamento de hardware, configuração de bancos de dados, aplicação de patches e backups. Com isso, você pode se concentrar no desempenho rápido, na alta disponibilidade, na segurança e na conformidade que as aplicações precisam.
+- Para as necessidades da base A necessidades podemos utilizar O Amazon Relational Database Service (Amazon RDS) que facilita configurar, operar e escalar bancos de dados relacionais na nuvem. O serviço oferece capacidade econômica e redimensionável e automatiza tarefas demoradas de administração, como provisionamento de hardware, configuração de bancos de dados, aplicação de patches e backups. Com isso, você pode se concentrar no desempenho rápido, na alta disponibilidade, na segurança e na conformidade que as aplicações precisam.
 
 - O Amazon RDS pode ser configurado com diversos serviços de banco de dados, com otimização para memória, desempenho ou E/S, bem como oferece suporte para os de bancos de dados mais comuns, incluindo Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle e Microsoft SQL Server.
 
@@ -18,14 +25,12 @@ os maiores níveis de segurança, mas o acesso a esses dados não precisa ser t�
 
 	[RDS](https://aws.amazon.com/rds/?nc1=h_ls)
 
-Base B:  Base B que também possui dados críticos, mas ao contrário da Base A, o acesso
-precisa ser um pouco mais rápido. Uma outra característica da Base B é que além de consultas
-ela é utilizada para extração de dados por meio de algoritmos de aprendizado de máquina.
+Base B:  
+
+- De  cara o Postgres também cumpre com as necessidades da base B, os ganhos são os citados no ponto acima. Porém para a utilização dos seus dados por meio algoritmos de ML, indicaria alguma implementação com serviços do S3, que são baratos, e perfomáticos na análise de dados estática e dinâmica.
 	
 
-
-Base C: A Base C, que não possui nenhum tipo de dado crítico, mas precisa de um acesso
-extremamente rápido.
+Base C: 
 
 - Para a necessidade de rápido acesso, e rastreio de eventos, o ElasticSearch se encaixa muito bem nesse caso. E com mesmo propósito de não ter que se preocupar com tarefas de administração da infraestrutura. Assim podemos ultilizar o ElasticSearch Service da AWS. A ideia do Elasticsearch é que além de armazenar os dados de forma não relacional, ele prove uma infra interna muito boa para retornar buscas muito pesadas. Por ser um motor de pesquisa textual altamente escalável, permite armazenar e analisar grandes volumes de informações praticamente em tempo real.
 
@@ -149,7 +154,7 @@ Microservice C
 
 #### Segurança
 
-Adicionei dois pontos de segurança na comunicação entre os serviços de disponibilização de dados, utilizando de 
+Adicionei dois pontos de segurança na comunicação entre os serviços de disponibilização de dados, são os seguintes:
 
 
 ##### Authenticação
@@ -163,11 +168,13 @@ como Google e Facebook.
 ##### CSRF  (Cross-Site Request Forgery)
 
 A primeira defesa contra ataques de [CSRF](https://pt.wikipedia.org/wiki/Cross-site_request_forgery) é garantir que as solicitações GET e outros métodos 'seguros', sejam livres de efeitos colaterais. Solicitações através de métodos "inseguros", como POST, PUT e DELETE, podem ser protegidos.
-Ferramentas como Django, rails, e outros frameworks se preocupam em disponibilizar uma fácil implementação para essa vulnerabilidade.
+Ferramentas como Django, Rails, e outros frameworks se preocupam em disponibilizar uma fácil implementação da utiliação de um [CSRF Token](https://docs.djangoproject.com/en/2.1/ref/csrf/) que trabalha em cima dessa vulnerabilidade. 
 
 #### Disponibilização dos dados
 
-Para a disponibilização dos dados, escolhi usar do poder da gama de ferramentas disponiveis em JavaScript para a criação de uma interface para o cliente. O a ferramenta mais atual, bem documentada e utilizada pela comunidade Open Source é o React. Com ele podemos utilizar bons padrões de projetos, tais com "Components" e "containers", já utilizados atualmente. Assim otimizando o desenvolvimento e a legibilidade do projeto.
+Para a disponibilização dos dados, escolhi usar do poder da gama de ferramentas disponiveis em JavaScript para a criação de uma interface para o cliente. O a ferramenta mais atual, bem documentada e utilizada pela comunidade Open Source é o React. Com ele podemos utilizar bons padrões de projetos React, tais com "Components" e "containers", já utilizados atualmente. Assim otimizando o desenvolvimento e a legibilidade do projeto.
+
+#### Continuous integration e Deploy
 
 #### Tecnologias adotadas
 - AWS
@@ -175,3 +182,16 @@ Para a disponibilização dos dados, escolhi usar do poder da gama de ferramenta
 - Django, Rails, Node, React
 - Postgres, ElasticSearch
 - Docker, Ansible
+
+
+#### Referencias
+- [Microservices: Decomposição de Aplicações para Implantação e Escalabilidade](https://www.infoq.com/br/articles/microservices-intro)
+- [Introdução ao REST InfoQ](https://www.infoq.com/br/articles/rest-introduction)
+-  [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
+- [ElasticSearch](https://www.elastic.co/products/elasticsearch)
+- [ElasticSearch Service](https://aws.amazon.com/pt/elasticsearch-service/)
+- [RDS](https://aws.amazon.com/rds/?nc1=h_ls)
+- [Token Based Authentication](https://www.w3.org/2001/sw/Europe/events/foaf-galway/papers/fp/token_based_authentication/)
+- [CSRF (Cross-Site Request Forgery)](https://pt.wikipedia.org/wiki/Cross-site_request_forgery)
+-  [Django CSRF Token](https://docs.djangoproject.com/en/2.1/ref/csrf/)
+
