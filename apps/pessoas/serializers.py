@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from services.pessoas.models import Endereco, Pessoa, Divida
+from .models import Endereco, Pessoa, Divida
 
 
 class EnderecoSerializer(serializers.ModelSerializer):
@@ -10,8 +10,8 @@ class EnderecoSerializer(serializers.ModelSerializer):
 
 
 class PessoaSerializer(serializers.ModelSerializer):
-	
-	endereco = serializers.StringRelatedField()
+
+    endereco = serializers.StringRelatedField()
     
     class Meta:
         model = Pessoa
@@ -19,7 +19,7 @@ class PessoaSerializer(serializers.ModelSerializer):
 
 class DividaSerializer(serializers.ModelSerializer):
 
-	pessoa = serializers.StringRelatedField(many=True)
+    pessoa = serializers.StringRelatedField(many=True)
     
     class Meta:
         model = Divida
