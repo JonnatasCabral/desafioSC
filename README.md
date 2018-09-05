@@ -191,6 +191,16 @@ Para melhorar a portabilidade das aplicações para os ambientes de desenvolvime
 - Postgres, ElasticSearch
 - Docker
 
+# Rodando aplicação
+
+```bash
+
+$ make build
+$ make up 
+$ make makemig
+$ make mig
+
+```
 
 #### Referências
 - [Microservices: Decomposição de Aplicações para Implantação e Escalabilidade](https://www.infoq.com/br/articles/microservices-intro)
