@@ -186,8 +186,8 @@ Para melhorar a portabilidade das aplicações para os ambientes de desenvolvime
 
 #### Tecnologias adotadas
 - AWS
-- Python, Ruby, JavaScript
-- Django, Rails, Node, React
+- Python,JavaScript
+- Django, Django-rest, React
 - Postgres, ElasticSearch
 - Docker
 
